@@ -2,68 +2,72 @@
 
 module.exports = function(controller) {
 
-    controller.on('hello', conductOnboarding);
-    controller.on('welcome_back', conductOnboarding);
+  controller.on('hello', conductOnboarding);
+  controller.on('welcome_back', conductOnboarding);
 
-    function conductOnboarding(bot, message) {
+  function conductOnboarding(bot, message) {
 
-      bot.startConversation(message, function(err, convo) {
+    bot.startConversation(message, function(err, convo) {
 
-        convo.say({
-          text: 'Hello human! I am brand new Botkit bot, ready to be customized to your needs!',
-          quick_replies: [
-            {
-              title: 'Help',
-              payload: 'help',
-            },
-          ]
-        });
-
-
+      convo.say({
+        text: 'Hello! I am Kleinbot and I am here to assist you if you are looking to buy or sell a property.',
+        quick_replies: [
+          {
+            title: 'buy', 
+            payload: 'buy',
+          },
+          {
+              title: 'sell',
+              payload: 'sell',
+          }
+        ]
       });
 
-    }
 
-    controller.hears(['help','contact','documentation','docs','community'], 'message_received', function(bot, message) {
+    });
+
+  }
+
+    controller.hears(['buy', 'sell'], 'message_received', function(bot, message) {
 
       bot.startConversation(message, function(err, convo) {
-
+        
         // set up a menu thread which other threads can point at.
         convo.ask({
-          text: 'I can point you to resources, and connect you with experts who can help.',
+          text: 'Give the area you are interested in:',
           quick_replies: [
             {
-              title: 'Read the Docs',
-              payload: 'documentation',
+              title: 'Thermi',
+              payload: 'thermi',
             },
             {
-              title: 'Join the Community',
-              payload: 'community',
+              title: 'Kalamaria',
+              payload: 'kalamaria',
             },
             {
-              title: 'Expert Help',
-              payload: 'contact us',
+              title: 'Evosmos',
+              payload: 'evosmos',
             },
           ]
         },[
           {
-            pattern: 'documentation',
+            pattern: 'thermi',
             callback: function(res, convo) {
-              convo.gotoThread('docs');
+              convo.gotoThread('thermi');
               convo.next();
             }
           },
           {
-            pattern: 'community',
+            pattern: 'kalamaria',
             callback: function(res, convo) {
-              convo.gotoThread('community');
+              convo.gotoThread('kalamaria');
               convo.next();
             }
           },
           {
-            pattern: 'contact',
+            pattern: 'evosmos',
             callback: function(res, convo) {
-              convo.gotoThread('contact');
+              convo.gotoThread('evosmos');
               convo.next();
             }
           },
@@ -77,49 +81,42 @@ module.exports = function(controller) {
 
         // set up docs threads
         convo.addMessage({
-          text: 'I do not know how to help with that. Say `help` at any time to access this menu.'
+          text: 'Sorry. I do not know how to help with that. Try again.'
         },'end');
                 
         // set up docs threads
         convo.addMessage({
-          text: 'Botkit is extensively documented! Here are some useful links:\n\n[Botkit Studio Help Desk](https://botkit.groovehq.com/help_center)\n\n[Botkit Anywhere README](https://github.com/howdyai/botkit-starter-web/blob/master/readme.md#botkit-anywhere)\n\n[Botkit Developer Guide](https://github.com/howdyai/botkit/blob/master/readme.md#build-your-bot)',
-        },'docs');
+          text: 'There are 3 properties in Thermi',
+        },'thermi');
 
         convo.addMessage({
           action: 'default'
-        }, 'docs');
+        }, 'thermi');
 
 
         // set up community thread
         convo.addMessage({
-          text: 'Our developer community has thousands of members, and there are always friendly people available to answer questions about building bots!',
-        },'community');
-
-        convo.addMessage({
-          text: '[Join our community Slack channel](https://community.botkit.ai) to chat live with the Botkit team, representatives from major messaging platforms, and other developers just like you!',
-        },'community');
-
-        convo.addMessage({
-          text: '[Checkout the Github Issue Queue](https://github.com/howdyai/botkit/issues) to find frequently asked questions, bug reports and more.',
-        },'community');
+          text: 'There are 2 properties in Kalamaria',
+        },'kalamaria');
 
         convo.addMessage({
           action: 'default'
-        }, 'community');
+        }, 'kalamaria');
 
 
 
         // set up contact thread
         convo.addMessage({
-          text: 'The team who built me can help you build the perfect robotic assistant! They can answer all of your questions, and work with you to develop custom applications and integrations.\n\n[Use this form to get in touch](https://botkit.ai/contact.html), or email us directly at [help@botkit.ai](mailto:help@botkit.ai), and a real human will get in touch!',
-        },'contact');
+          text: 'There are 5 properties in Evosmos',
+        },'evosmos');
         convo.addMessage({
           action: 'default'
-        }, 'contact');
+        }, 'evosmos');
 
       });
-
+     
+      
+ 
     });
-
-
-}
+    
+  }
