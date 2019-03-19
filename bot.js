@@ -59,6 +59,12 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
   require("./skills/" + file)(controller);
 });
 
+var Botkit = require('botkit');
+    var mysqlStorage = require('botkit-storage-mysql')({host: '127.0.0.1', user: 'root', password: '', database: 'kleindb'});
+    controller = Botkit.anywhere({
+        storage: mysqlStorage
+    });
+
 console.log('I AM ONLINE! COME TALK TO ME: http://localhost:' + (process.env.PORT || 3000))
 
 function usage_tip() {
