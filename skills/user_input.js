@@ -17,14 +17,14 @@ module.exports = function(controller) {
 
 
 
-   controller.hears('user input', 'message_received', function(bot, message) {
+   controller.hears('buyujmkm8ik8ik', 'message_received', function(bot, message) {
 
 
           // Start convertation about Area
           bot.startConversation(message, function(err, convo) {
 
 
-              convo.addQuestion('Give me area: ', function(response, convo) {
+              convo.addQuestion('Please give me the area of your interest ', function(response, convo) {
 
                convo.setVar('area', response.text)
 
