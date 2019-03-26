@@ -8,17 +8,17 @@ module.exports = function(controller) {
   function conductOnboarding(bot, message) {
 
     bot.startConversation(message, function(err, convo) {
-
+      convo.addMessage('Ahoy! I\'m Kleinbot.','default')
       convo.say({
-        text: 'Hello! I am Kleinbot and I am here to assist you if you are looking to buy or sell a property.',
+        text: 'I\'m here to assist you if you are looking to buy or sell a property.',
         quick_replies: [
           {
-            title: 'buy', 
-            payload: 'buy',
+            title: 'Buy', 
+            payload: 'Buy',
           },
           {
-              title: 'sell',
-              payload: 'sell',
+              title: 'Sell',
+              payload: 'Sell',
           }
         ]
       });

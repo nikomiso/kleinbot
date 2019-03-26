@@ -10,12 +10,12 @@ module.exports = function(controller) {
             text: 'Would you like to check the average selling price of an area or entry your property?' ,
             quick_replies: [
                 {
-                title: 'average selling price', 
-                payload: 'average selling price',
+                title: 'Average selling price', 
+                payload: 'Average selling price',
                 },
                 {
-                    title: 'entry',
-                    payload: 'entry',
+                    title: 'Entry',
+                    payload: 'Entry',
                 }
             ]
             });
